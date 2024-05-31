@@ -1,7 +1,3 @@
-#' Personal ggplot2 theme
-#'
-#' @import ggplot2
-
 
 # define theme function
 theme_plex <- function() {
