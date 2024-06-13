@@ -1,3 +1,13 @@
+#' Add together two numbers
+#'
+#' @import tidyverse
+#' @param x A dataframe with two columns: cpos and context with the sentences to be detokenized
+#' @param context A the name of the column with the sentences to be tokenized.
+#' @returns A data frame with detokenized text.
+#' @examples
+#' \dontrun{
+#' detokenize(x)
+#'}
 detokenize <- function(x, context = context) {
   x |>
     mutate(
