@@ -1,5 +1,6 @@
 #' Add together two numbers
 #'
+#' @export
 #' @import tidyverse
 #' @param x A dataframe with two columns: cpos and context with the sentences to be detokenized
 #' @param context A the name of the column with the sentences to be tokenized.
