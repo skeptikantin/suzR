@@ -5,3 +5,5 @@
 .DS_Store
 .quarto
 data/
+R/global.R
+R/graphs.R
