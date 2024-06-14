@@ -2,7 +2,7 @@
 % Please edit documentation in R/detokenize.R
 \name{detokenize}
 \alias{detokenize}
-\title{Add together two numbers}
+\title{Detokenize corpus output}
 \usage{
 detokenize(x, context = context)
 }
@@ -15,7 +15,9 @@ detokenize(x, context = context)
 A data frame with detokenized text.
 }
 \description{
-Add together two numbers
+Output from corpus files in CQP mode are often already tokenized. This function
+untokenizes the most basic tokenization issues (and removes some punctuation)
+as a quick fix for now. Experimental.
 }
 \examples{
 \dontrun{

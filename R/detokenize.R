@@ -1,4 +1,9 @@
-#' Add together two numbers
+#' Detokenize corpus output
+#'
+#' @description
+#' Output from corpus files in CQP mode are often already tokenized. This function
+#' untokenizes the most basic tokenization issues (and removes some punctuation)
+#' as a quick fix for now. Experimental.
 #'
 #' @export
 #' @import tidyverse
