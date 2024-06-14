@@ -4,7 +4,7 @@ Version: 0.0.1.0000
 Authors@R: 
     person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
            comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
+Description: Collection of functions for my work in R.
 Imports: tidyverse, collostructions, dplyr
 License: MIT + file LICENSE
 Encoding: UTF-8
