@@ -8,6 +8,7 @@ collex_batch(
   x,
   corpsize = 100000000L,
   ams = NULL,
+  all = FALSE,
   str.dir = TRUE,
   decimals = 5,
   cxn.freq = NULL,
@@ -21,6 +22,8 @@ collex_batch(
 \item{corpsize}{Size of the corpus (as per normal collex()).}
 
 \item{ams}{A vector with association measures for the batch. If unspecified, returns logl, odds, mi.}
+
+\item{all}{Boolean. If \code{TRUE}, calculates all available ams.}
 
 \item{str.dir}{Should directional am be determined? Defaults to \code{TRUE}}
 

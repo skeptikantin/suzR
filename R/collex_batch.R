@@ -10,6 +10,7 @@
 #' @param x An input dataframe like for normal collex().
 #' @param corpsize Size of the corpus (as per normal collex()).
 #' @param ams A vector with association measures for the batch. If unspecified, returns logl, odds, mi.
+#' @param all Boolean. If `TRUE`, calculates all available ams.
 #' @param str.dir Should directional am be determined? Defaults to `TRUE`
 #' @param decimals Default decimals for the output (as per collex()).
 #' @param cxn.freq For truncated data sets, full cxn frequency.
@@ -20,12 +21,16 @@
 #' \dontrun{
 #' collex_batch(x)
 #'}
-collex_batch <- function(x, corpsize = 1e+08L, ams = NULL, str.dir = TRUE,
+collex_batch <- function(x, corpsize = 1e+08L, ams = NULL, all = FALSE, str.dir = TRUE,
                          decimals = 5, cxn.freq = NULL, delta.p = TRUE, tidy = TRUE) {
   x <- as.data.frame(x)
 
   if (is.null(ams)) {
     ams <- c("logl", "odds", "mi")
+  } else if (all) {
+    ams <- c("logl", "chisq", "cramersV", "dice",
+             "fye", "fye.ln", "gmean", "jaccard", "liddell", "mi",
+             "ms", "mi3", "odds", "pois", "t", "z", "z.cor", "random")
   }
 
   # first define an empty dataframe where the results are written to:
