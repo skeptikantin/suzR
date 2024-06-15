@@ -38,7 +38,7 @@ collex_batch <- function(x, corpsize = 1e+08L, ams = NULL, all = FALSE, str.dir 
   # from the first iteration, keep all cols:
   for (i in 1:length(ams)) {
     # calculate sca
-    sca <- collex(x, corpsize = ice_crp_freq, am = ams[i], str.dir = TRUE, delta.p = TRUE)
+    sca <- collex(x, corpsize = corpsize, am = ams[i], str.dir = TRUE, delta.p = TRUE)
     # rename sca columns
     names(sca)[names(sca) == 'STR.DIR'] <- ams[i]
     # remove the coll.str column to avoid problems with successive iterations:
