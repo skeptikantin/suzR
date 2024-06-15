@@ -36,7 +36,7 @@ collex_batch <- function(x, corpsize = 1e+08L, ams = NULL, all = FALSE, str.dir 
     ams <- c("logl", "chisq", "cramersV", "dice",
              "fye", "fye.ln", "gmean", "jaccard", "liddell", "mi",
              "ms", "mi3", "odds", "pois", "t", "z", "z.cor", "random")
-  } else if (is.null(all)) {
+  } else if (is.null(ams)) {
     ams <- c("logl", "odds", "mi")
   }
 
