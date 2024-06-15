@@ -31,12 +31,13 @@ collex_batch <- function(x, corpsize = 1e+08L, ams = NULL, all = FALSE, str.dir 
   # if some dplyr df that wouldn't pass the current data class test:
   x <- as.data.frame(x)
 
-  if (is.null(ams)) {
-    ams <- c("logl", "odds", "mi")
-  } else if (all) {
+  # determine which ams are to be calculated
+  if (all) {
     ams <- c("logl", "chisq", "cramersV", "dice",
              "fye", "fye.ln", "gmean", "jaccard", "liddell", "mi",
              "ms", "mi3", "odds", "pois", "t", "z", "z.cor", "random")
+  } else if (is.null(all)) {
+    ams <- c("logl", "odds", "mi")
   }
 
   # first define an empty dataframe where the results are written to:
