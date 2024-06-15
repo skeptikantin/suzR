@@ -23,6 +23,12 @@
 #'}
 collex_batch <- function(x, corpsize = 1e+08L, ams = NULL, all = FALSE, str.dir = TRUE,
                          decimals = 5, cxn.freq = NULL, delta.p = TRUE, tidy = TRUE) {
+
+  # visibly bind global variables:
+  SIGNIF = COLLEX = CORP.FREQ = ASSOC = OBS = EXP = DP1 = DP2 = NULL
+  corp.freq = assoc = obs = dp1 = dp2 = NULL
+
+  # if some dplyr df that wouldn't pass the current data class test:
   x <- as.data.frame(x)
 
   if (is.null(ams)) {
@@ -38,7 +44,7 @@ collex_batch <- function(x, corpsize = 1e+08L, ams = NULL, all = FALSE, str.dir 
   # from the first iteration, keep all cols:
   for (i in 1:length(ams)) {
     # calculate sca
-    sca <- collex(x, corpsize = corpsize, am = ams[i], str.dir = TRUE, delta.p = TRUE)
+    sca <- collex(x, corpsize = corpsize, am = ams[i], str.dir = str.dir, delta.p = delta.p)
     # rename sca columns
     names(sca)[names(sca) == 'STR.DIR'] <- ams[i]
     # remove the coll.str column to avoid problems with successive iterations:
@@ -50,14 +56,14 @@ collex_batch <- function(x, corpsize = 1e+08L, ams = NULL, all = FALSE, str.dir 
     if (i == 1) {
       res <- subset(sca, select = c(COLLEX, CORP.FREQ, ASSOC, OBS, EXP, DP1, DP2, grep(ams[i], colnames(sca))))
     } else {
-      # first only select relevant cols
+      # first only select relevant cols to avoid duplicates in merging:
       sca <- subset(sca, select = -c(CORP.FREQ, OBS, EXP, ASSOC, DP1, DP2))
       # now merge with res:
       res <- merge(res, sca, by = "COLLEX")
     }
   }
 
-  # sort data frame by frequency of occurrence in frequency:
+  # sort data frame by frequency of occurrence in construction:
   res <- res[order(res$OBS, decreasing = TRUE),]
   rownames(res) <- NULL
 
