@@ -1,4 +1,4 @@
-#' Determine ams for collex() in batch
+#' Determine ams for collex.dist() in batch
 #'
 #' @description
 #' Function determines multiple association measures at once.
@@ -8,25 +8,24 @@
 #' @import collostructions
 #' @import dplyr
 #' @param x An input dataframe like for normal collex().
-#' @param corpsize Size of the corpus (as per normal collex()).
 #' @param ams A vector with association measures for the batch. If unspecified, returns logl, odds, mi.
 #' @param all_ams Boolean. If `TRUE`, calculates all available ams.
 #' @param str.dir Should directional am be determined? Defaults to `TRUE`
-#' @param decimals Default decimals for the output (as per collex()).
-#' @param cxn.freq For truncated data sets, full cxn frequency.
 #' @param delta.p Should deltaP be determined? Defaults to `TRUE`
+#' @param decimals Default decimals for the output (as per collex()).
+#' @param raw Default `FALSE`, whether input contains raw observations or aggregated counts.
 #' @param tidy Should the output have lower-case ('tidy') col names?
-#' @returns A data frame with the usual collex() output. Sorted alphabetically (?)
+#' @returns A data frame with the usual collex.dist() output. Sorted by first association measure.
 #' @examples
 #' \dontrun{
-#' collex_batch(x)
+#' collex.dist_batch(x)
 #'}
-collex_batch <- function(x, corpsize = 1e+08L, ams = NULL, all_ams = FALSE, str.dir = TRUE,
-                         decimals = 5, cxn.freq = NULL, delta.p = TRUE, tidy = TRUE) {
+
+collex.dist_batch <- function(x, ams = NULL, all_ams = FALSE, str.dir = TRUE, delta.p = TRUE,
+                              decimals = 5, raw = FALSE, tidy = TRUE) {
 
   # visibly bind global variables:
-  SIGNIF = COLLEX = CORP.FREQ = ASSOC = OBS = EXP = DP1 = DP2 = NULL
-  corp.freq = assoc = obs = dp1 = dp2 = NULL
+  COLLEX = CORP.FREQ = ASSOC = O.CXN1 = E.CXN1 = O.CXN2 = E.CXN2 = SHARED = SIGNIF = DP1 = DP2 = NULL
 
   # if some dplyr df that wouldn't pass the current data class test:
   x <- as.data.frame(x)
@@ -45,32 +44,34 @@ collex_batch <- function(x, corpsize = 1e+08L, ams = NULL, all_ams = FALSE, str.
   # from the first iteration, keep all cols:
   for (i in 1:length(ams)) {
     # calculate sca
-    sca <- collex(x, corpsize = corpsize, am = ams[i], str.dir = str.dir, delta.p = delta.p)
+    dca <- collex.dist(x, am = ams[i], str.dir = str.dir, delta.p = delta.p)
     # rename sca columns
-    names(sca)[names(sca) == 'STR.DIR'] <- ams[i]
+    names(dca)[names(dca) == 'STR.DIR'] <- ams[i]
     # remove the coll.str column to avoid problems with successive iterations:
-    sca <- sca[, -grep("COLL.STR", colnames(sca))]
+    dca <- dca[, -grep("COLL.STR", colnames(dca))]
     # remove signif column:
-    sca <- subset(sca, select = -SIGNIF)
+    dca <- subset(dca, select = -c(SIGNIF, SHARED))
 
     # if first iteration, copy sca to res
     if (i == 1) {
-      res <- subset(sca, select = c(COLLEX, CORP.FREQ, ASSOC, OBS, EXP, DP1, DP2, grep(ams[i], colnames(sca))))
+      res <- subset(dca, select = c(COLLEX, ASSOC, O.CXN1, E.CXN1, O.CXN2, E.CXN2,
+                                    DP1, DP2, grep(ams[i], colnames(dca))))
     } else {
       # first only select relevant cols to avoid duplicates in merging:
-      sca <- subset(sca, select = -c(CORP.FREQ, OBS, EXP, ASSOC, DP1, DP2))
+      dca <- subset(dca, select = -c(O.CXN1, E.CXN1, O.CXN2, E.CXN2, ASSOC, DP1, DP2))
       # now merge with res:
-      res <- merge(res, sca, by = "COLLEX")
+      res <- merge(res, dca, by = "COLLEX")
     }
   }
 
-  # sort data frame by frequency of occurrence in construction:
-  res <- res[order(res$OBS, decreasing = TRUE),]
+  # sort data frame by first association measure provided (usually logl):
+  index <-which(grepl(ams[1], colnames(res)))
+  res <- res[order(res[,index], decreasing = TRUE),] # can be used to incorporate the REVERSE arg
   rownames(res) <- NULL
 
   if (tidy) {
     names(res) <- tolower(names(res))
-    res <- dplyr::select(res, collex, corp.freq, assoc, obs, exp, dp1, dp2, everything())
+    res <- dplyr::select(res, collex, assoc, o.cxn1, e.cxn1, o.cxn2, e.cxn2, dp1, dp2, everything())
   }
   res
 }
