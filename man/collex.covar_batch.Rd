@@ -21,7 +21,7 @@ collex.covar_batch(
 
 \item{ams}{A vector with association measures for the batch. If unspecified, returns logl, odds, mi.}
 
-\item{all_ams}{Boolean. If \code{TRUE}, calculates all available ams.}
+\item{all_ams}{Boolean. If \code{TRUE}, calculates all available ams. Default \code{FALSE}.}
 
 \item{all_combos}{Boolean. If \code{TRUE}, calculate all possible collex combinations. Default \code{FALSE}.}
 
@@ -33,7 +33,7 @@ collex.covar_batch(
 
 \item{raw}{Default \code{FALSE}, whether input contains raw observations or aggregated counts.}
 
-\item{tidy}{Should the output have lower-case ('tidy') col names?}
+\item{tidy}{Should the output have lower-case ('tidy') col names? Requires {dplyr}.}
 }
 \value{
 A data frame with the usual collex.dist() output. Sorted by first association measure.

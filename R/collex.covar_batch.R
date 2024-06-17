@@ -9,13 +9,13 @@
 #' @import dplyr
 #' @param x An input dataframe like for normal collex().
 #' @param ams A vector with association measures for the batch. If unspecified, returns logl, odds, mi.
-#' @param all_ams Boolean. If `TRUE`, calculates all available ams.
+#' @param all_ams Boolean. If `TRUE`, calculates all available ams. Default `FALSE`.
 #' @param all_combos Boolean. If `TRUE`, calculate all possible collex combinations. Default `FALSE`.
 #' @param str.dir Should directional am be determined? Defaults to `TRUE`
 #' @param delta.p Should deltaP be determined? Defaults to `TRUE`
 #' @param decimals Default decimals for the output (as per collex()).
 #' @param raw Default `FALSE`, whether input contains raw observations or aggregated counts.
-#' @param tidy Should the output have lower-case ('tidy') col names?
+#' @param tidy Should the output have lower-case ('tidy') col names? Requires {dplyr}.
 #' @returns A data frame with the usual collex.dist() output. Sorted by first association measure.
 #' @examples
 #' \dontrun{
@@ -46,7 +46,7 @@ collex.covar_batch <- function(x, ams = NULL, all_ams = FALSE, all_combos = FALS
   # from the first iteration, keep all cols:
   for (i in 1:length(ams)) {
     # calculate sca
-    cca <- collex.covar(x, am = ams[i], raw = FALSE, str.dir = str.dir, delta.p = delta.p)
+    cca <- collex.covar(x, am = ams[i], raw = raw, str.dir = str.dir, delta.p = delta.p)
     # rename sca columns
     names(cca)[names(cca) == 'STR.DIR'] <- ams[i]
     # remove the coll.str column to avoid problems with successive iterations:
