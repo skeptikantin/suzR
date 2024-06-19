@@ -17,7 +17,3 @@ Table of pearson residuals
 \description{
 Function determines pearson residuals from a chi-square test
 }
-\examples{
-\dontrun{
-}
-}

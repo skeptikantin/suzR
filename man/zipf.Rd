@@ -20,8 +20,3 @@ Numeric vector of length 1 with hrel of the input vector.
 \description{
 Function determines a Zipf converted value of corpus frequency
 }
-\examples{
-\dontrun{
-
-}
-}

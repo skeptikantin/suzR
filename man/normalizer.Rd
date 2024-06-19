@@ -20,8 +20,3 @@ Returns something (update required)
 \description{
 Function to normalize corpus frequencies
 }
-\examples{
-\dontrun{
-
-}
-}

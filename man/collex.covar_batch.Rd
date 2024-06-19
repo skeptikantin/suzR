@@ -33,7 +33,7 @@ collex.covar_batch(
 
 \item{raw}{Default \code{FALSE}, whether input contains raw observations or aggregated counts.}
 
-\item{tidy}{Should the output have lower-case ('tidy') col names? Requires {dplyr}.}
+\item{tidy}{Should the output have lower-case ('tidy') col names? Requires dplyr.}
 }
 \value{
 A data frame with the usual collex.dist() output. Sorted by first association measure.

@@ -9,10 +9,6 @@
 #' Default is number of tokens in COCA excl. punctuation
 #' @param base Base of per x ('million') frequency
 #' @returns Returns something (update required)
-#' @examples
-#' \dontrun{
-#'
-#'}
 normalizer <- function(x, corpsize, base = "million") {
 
   if (base == "million") {

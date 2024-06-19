@@ -9,9 +9,6 @@
 #' @param x Dataframe of tabulated counts (usual input to chisq.test())
 #' @param decimals Number of decimals in output
 #' @returns Table of pearson residuals
-#' @examples
-#' \dontrun{
-#'}
 chisq.res <- function(x, decimals = 3) {
 
   tested.df <- chisq.test(x)
