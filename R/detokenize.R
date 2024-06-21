@@ -17,6 +17,12 @@
 detokenize <- function(x, context = context) {
   x |>
     mutate(
+
+      ## remove boilerplate tokens:
+      # TOOLONG:
+      context = str_replace_all(context, "\\(?\\*{2}\\S+TOOLONG\\)?", " "),
+      # linguistic meta:
+
       # remove double quotations
       context = str_replace_all(context, '"', " "),
       # remove single quation marks with space in between
@@ -34,13 +40,28 @@ detokenize <- function(x, context = context) {
       # remove space before closing brackets
       context = str_replace_all(context, " *(\\))", "\\1"),
       # fix double hyphens
-      context = str_replace_all(context, " -- ", " - "),
+      context = str_replace_all(context, " *-- ", " - "),
       # erroneous tokenization for plural possessive marker:
       context = str_replace_all(context, "s ' ", "s' "),
       # remove single quotation marks after the contractions etc. have been fixed:
       context = str_replace_all(context, " ' ", " "),
 
+      # remove the 'off-screen' tokens (-> '@!...:'"):
+      context = str_replace_all(context, "@!?\\S+? ", ""),
+      # remove bracketed stuff at the beginning: TODO
+      context = str_replace_all(context, "^\\(\\S+?\\) *", ""),
+
+      # remove hashes:
+      context = str_replace_all(context, " *[#//+]+ ", " "),
+      # remove spaces after dollar sings etc.:
+      context = str_replace_all(context, "$ ", "$"),
+      # remove sequences of trailing hyphens & co:
+      context = str_replace_all(context, "^ *[-,;:'\". *)+&/]+ *", ""),
+
       # final: remove double+ spaces:
-      context = str_replace_all(context, "  +", " ")
+      context = str_replace_all(context, "  +", " "),
+      # remove leading and trailing whitespace:
+      context = str_replace_all(context, "(^ *| *$)", "")
+
     )
 }
