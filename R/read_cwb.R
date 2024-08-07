@@ -8,6 +8,7 @@
 #' @import tidyverse
 #' @param path A filepath to the raw input
 #' @param skip Number of lines to skip (11 default for cwb header).
+#' @param preserve_tags If FALSE (default), function will split input into left, match, right
 #' @returns A tibble with tab-separated left, match, right.
 #' @examples
 #' \dontrun{
