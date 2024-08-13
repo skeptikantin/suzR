@@ -11,7 +11,7 @@ read_cwb(path, skip = 11, preserve_tags = FALSE)
 
 \item{skip}{Number of lines to skip (11 default for cwb header).}
 
-\item{preserve_tags}{If FALSE (default), function will split input into left, match, right}
+\item{preserve_tags}{If TRUE, function will split input into left, match, right (default: FALSE)}
 }
 \value{
 A tibble with tab-separated left, match, right.
