@@ -4,14 +4,14 @@
 \alias{read_cwb}
 \title{Read raw CWB output}
 \usage{
-read_cwb(path, skip = 11, preserve_tags = FALSE)
+read_cwb(path, skip = 11, kwicize = FALSE)
 }
 \arguments{
 \item{path}{A filepath to the raw input}
 
 \item{skip}{Number of lines to skip (11 default for cwb header).}
 
-\item{preserve_tags}{If TRUE, function will split input into left, match, right (default: FALSE)}
+\item{kwicize}{If TRUE, function will split input into left, match, right (default: FALSE)}
 }
 \value{
 A tibble with tab-separated left, match, right.

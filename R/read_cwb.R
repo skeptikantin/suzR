@@ -8,17 +8,18 @@
 #' @import tidyverse
 #' @param path A filepath to the raw input
 #' @param skip Number of lines to skip (11 default for cwb header).
-#' @param preserve_tags If TRUE, function will split input into left, match, right (default: FALSE)
+#' @param kwicize If TRUE, function will split input into left, match, right (default: FALSE)
 #' @returns A tibble with tab-separated left, match, right.
 #' @examples
 #' \dontrun{
 #' detokenize(x)
 #'}
-read_cwb <- function(path, skip = 11, preserve_tags = FALSE) {
+read_cwb <- function(path, skip = 11, kwicize = FALSE) {
+
   res <- readr::read_lines(path, skip = skip) |>
     as_tibble()
 
-  if (preserve_tags) {
+  if (kwicize) {
 
     res <- res |>
       # recreate the traditional KWIC view:

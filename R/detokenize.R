@@ -18,6 +18,11 @@ detokenize <- function(x, context = context) {
   x |>
     mutate(
 
+      # if run over raw CWB output, remove the brackets
+      context = str_replace_all(context, " (\\[{3}|\\]{3}) ", " "),
+      context = str_replace_all(context, "^(\\[{3}) ", ""),
+      context = str_replace_all(context, " (\\]{3})$", ""),
+
       ## remove boilerplate tokens:
       # TOOLONG:
       context = str_replace_all(context, "\\(?\\*{2}\\S+TOOLONG\\)?", " "),
@@ -50,6 +55,9 @@ detokenize <- function(x, context = context) {
       context = str_replace_all(context, "@!?\\S+? ", ""),
       # remove bracketed stuff at the beginning: TODO
       context = str_replace_all(context, "^\\(\\S+?\\) *", ""),
+      # remove numbers at the beginning
+      context = str_replace_all(context, "^ *\\d+ ", ""),
+
 
       # remove hashes:
       context = str_replace_all(context, " *[#//+]+ ", " "),

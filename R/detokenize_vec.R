@@ -22,6 +22,11 @@ detokenize_vec <- function(x, context = context) {
   x |>
     mutate(
 
+      # if run over raw CWB output, remove the brackets
+      across(cont_cols, ~str_replace_all(., " (\\[{3}|\\]{3}) ", " ")),
+      across(cont_cols, ~str_replace_all(., "^(\\[{3}) ", "")),
+      across(cont_cols, ~str_replace_all(., " (\\]{3})$", "")),
+
       ## remove boilerplate tokens:
       # TOOLONG:
       across(cont_cols, ~str_replace_all(., "\\(?\\*{2}\\S+TOOLONG\\)?", " ")),
@@ -67,6 +72,9 @@ detokenize_vec <- function(x, context = context) {
 
       # remove bracketed stuff at the beginning: TODO
       across(cont_cols, ~str_replace_all(., "^\\(\\S+?\\) *", "")),
+
+      # remove numbers at the beginning
+      across(cont_cols, ~str_replace_all(., "^ *\\d+ ", "")),
 
       # remove hashes:
       across(cont_cols, ~str_replace_all(., " *[#//+]+ ", " ")),
