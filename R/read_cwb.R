@@ -26,7 +26,7 @@ read_cwb <- function(path, skip = 11, kwicize = FALSE) {
       mutate(cpos = gsub("^ *(\\d+):.*$", "\\1", value),
              left = gsub("^ *\\d+: *(.*?) *\\[\\[\\[.*$", "\\1", value),
              match = gsub("^.*\\[\\[\\[ *(.*?) *\\]\\]\\].*$", "\\1", value),
-             right = gsub("^.+\\]\\]\\] (.*?)$", "\\1", value))
+             right = gsub("^.+\\]\\]\\] ?(.*?)$", "\\1", value))
   } else {
 
     res <- res |>
