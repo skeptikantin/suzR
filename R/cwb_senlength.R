@@ -17,7 +17,7 @@
 cwb_senlength <- function(x, required_length = 3, filter_short = TRUE, remove_cols = TRUE, ignore_cols = NULL) {
 
   # ignored columns TO DO!!:
-  if (NULL) {
+  if (is.null(ignore_cols)) {
     y <- x
   } else {
     y <- x |>

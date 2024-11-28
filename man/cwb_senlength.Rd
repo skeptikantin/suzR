@@ -4,7 +4,13 @@
 \alias{cwb_senlength}
 \title{Count sentence length in cwb context sentences}
 \usage{
-cwb_senlength(x, required_length = 3, filter_short = TRUE, remove_cols = TRUE)
+cwb_senlength(
+  x,
+  required_length = 3,
+  filter_short = TRUE,
+  remove_cols = TRUE,
+  ignore_cols = NULL
+)
 }
 \arguments{
 \item{x}{A dataframe with a cpos column and context sentences}
@@ -14,6 +20,8 @@ cwb_senlength(x, required_length = 3, filter_short = TRUE, remove_cols = TRUE)
 \item{filter_short}{Should the target concs with short context sentences be removed?}
 
 \item{remove_cols}{Should the ancillary columns be removed?}
+
+\item{ignore_cols}{Which columns should be ignored?}
 }
 \description{
 Function to split cwb context
