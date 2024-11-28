@@ -46,12 +46,12 @@ cwb_context <- function(x, cols = conc, delim = "</s>",
   if (filter_incomplete) {
     res <- res |>
       # determine if all sentences are complete:
-      mutate(contexts_complete = if_else(if_any(.cols = everything(), ~ grepl("@ @ @", .)), "no", "yes")) |>
-      filter(contexts_complete == "yes") |>
-      select(-contexts_complete)
+      mutate(conts_complete = if_else(if_any(.cols = everything(), ~ grepl("@ @ @", .)), "no", "yes")) |>
+      filter(conts_complete == "yes") |>
+      select(-conts_complete)
   } else {
     res <- res |>
-      mutate(contexts_complete = if_else(if_any(.cols = everything(), ~ grepl("@ @ @", .)), "no", "yes"))
+      mutate(conts_complete = if_else(if_any(.cols = everything(), ~ grepl("@ @ @", .)), "no", "yes"))
   }
 
   # return the df:
