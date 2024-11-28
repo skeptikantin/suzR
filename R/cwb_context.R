@@ -30,7 +30,8 @@ cwb_context <- function(x, cols = conc, delim = "</s>",
   if (debug) {
 
     res <- x |>
-      separate_wider_delim(cols = conc, delim = delim, names = col_names, too_few = "debug", too_many = 'debug')
+      separate_wider_delim(cols = conc, delim = delim, names = col_names, too_few = "debug", too_many = 'debug') |>
+      mutate_at(vars(starts_with('context')), (~ sub("<s>", "", .)))
 
   } else {
 
