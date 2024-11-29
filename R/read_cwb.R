@@ -14,7 +14,7 @@
 #' \dontrun{
 #' detokenize(x)
 #'}
-read_cwb <- function(path, skip = 11, kwicize = FALSE) {
+read_cwb <- function(path, skip = 10, kwicize = FALSE) {
 
   res <- readr::read_lines(path, skip = skip) |>
     as_tibble()
