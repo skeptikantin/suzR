@@ -1,0 +1,28 @@
+---
+title: "Great project"
+author: "Susanne Flach"
+date: "2024-03-22"
+output: 
+  html_document:
+    theme: flatly
+    toc: true
+    toc_float: true
+    code_folding: hide
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+PB = c(rgb(0, 102, 204, maxColorValue=255))
+PG = c(rgb(153, 204, 0, maxColorValue=255))
+
+library(tidyverse)
+library(suzR)
+library(hrbrthemes)
+
+theme_set(theme_ipsum_gs())
+```
+
+### Use
+
+Place rmd & html into folder docs/ for use in githubpages reports

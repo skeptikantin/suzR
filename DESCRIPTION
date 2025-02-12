@@ -1,6 +1,6 @@
 Package: suzR
 Title: Wrapper functions for my work
-Version: 0.0.1.0000
+Version: 0.0.1.0002
 Authors@R: 
     person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
            comment = c(ORCID = "YOUR-ORCID-ID"))
@@ -9,4 +9,4 @@ Imports: tidyverse, dplyr, collostructions, ggplot2, ggtext
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.1
+RoxygenNote: 7.3.2
