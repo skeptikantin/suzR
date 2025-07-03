@@ -6,6 +6,7 @@
 #'
 #' @export
 #' @import tidyverse
+#' @import readr
 #' @param path A filepath to the raw input
 #' @param skip Number of lines to skip (11 default for cwb header).
 #' @param kwicize If TRUE, function will split input into left, match, right (default: FALSE)

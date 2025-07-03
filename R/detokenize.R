@@ -7,6 +7,7 @@
 #'
 #' @export
 #' @import tidyverse
+#' @import stringr
 #' @param x A dataframe with two columns: cpos and context with the sentences to be detokenized
 #' @param context A the name of the column with the sentences to be tokenized.
 #' @returns A data frame with detokenized text.

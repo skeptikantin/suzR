@@ -5,6 +5,7 @@
 #'
 #' @export
 #' @import tidyverse
+#' @import tidyr
 #' @param x A dataframe with two columns: cpos and context with the sentences to be detokenized
 #' @param cols The name of the column with the concordance (usually "conc")
 #' @param delim The delimiter at which the sentences shall be split.
