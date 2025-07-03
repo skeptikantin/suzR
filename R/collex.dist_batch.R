@@ -26,6 +26,7 @@ collex.dist_batch <- function(x, ams = NULL, all_ams = FALSE, str.dir = TRUE, de
 
   # visibly bind global variables:
   COLLEX = CORP.FREQ = ASSOC = O.CXN1 = E.CXN1 = O.CXN2 = E.CXN2 = SHARED = SIGNIF = DP1 = DP2 = NULL
+  assoc = o.cxn1 = e.cxn1 = o.cxn2 = e.cxn2 = dp1 = dp2 = NULL
 
   # if some dplyr df that wouldn't pass the current data class test:
   x <- as.data.frame(x)

@@ -28,6 +28,8 @@ collex.covar_batch <- function(x, ams = NULL, all_ams = FALSE, all_combos = FALS
 
   # visibly bind global variables:
   COLLEX = CORP.FREQ = ASSOC = O.CXN1 = E.CXN1 = O.CXN2 = E.CXN2 = SHARED = SIGNIF = DP1 = DP2 = NULL
+  SLOT1 = SLOT2 = fS1 = fS2 = OBS = EXP = NULL
+  slot1 = slot2 = assoc = fs1 = fs2 = obs = dp1 = dp2 = NULL
 
   # if some dplyr df that wouldn't pass the current data class test:
   x <- as.data.frame(x)

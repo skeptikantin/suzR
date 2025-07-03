@@ -8,6 +8,7 @@ cwb_context(
   x,
   cols = conc,
   delim = "</s>",
+  col_names = c("context3", "context2", "context1", "context", "end"),
   no_of_contexts = 3,
   filter_incomplete = FALSE,
   debug = FALSE
@@ -20,9 +21,13 @@ cwb_context(
 
 \item{delim}{The delimiter at which the sentences shall be split.}
 
+\item{col_names}{A vector with the column names (default works for 3 context sentences)}
+
 \item{no_of_contexts}{An integer with the number of LEFT context sentences}
 
-\item{col_names}{A vector with the column names (default works for 3 context sentences)}
+\item{filter_incomplete}{Should sentences with "@ @ @" be excluded?}
+
+\item{debug}{separate_wider_delim() tends to break with messy data, so a debugging round to identify the issue might be needed (in which case filter_incomplete should be set to FALSE)}
 }
 \value{
 A data frame with detokenized text.

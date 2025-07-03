@@ -10,17 +10,20 @@
 #' @param delim The delimiter at which the sentences shall be split.
 #' @param col_names A vector with the column names (default works for 3 context sentences)
 #' @param no_of_contexts An integer with the number of LEFT context sentences
-#' @filter_incomplete Should sentences with "@ @ @" be excluded?
-#' @debug separate_wider_delim() tends to break with messy data, so a debugging round to identify the issue might be needed (in which case filter_incomplete should be set to FALSE)
+#' @param filter_incomplete Should sentences with "@ @ @" be excluded?
+#' @param debug separate_wider_delim() tends to break with messy data, so a debugging round to identify the issue might be needed (in which case filter_incomplete should be set to FALSE)
 #' @returns A data frame with detokenized text.
 #' @examples
 #' \dontrun{
 #' process_cwb_context(x)
 #'}
 cwb_context <- function(x, cols = conc, delim = "</s>",
-                        #col_names = c("context3", "context2", "context1", "context", "end"),
+                        col_names = c("context3", "context2", "context1", "context", "end"),
                         no_of_contexts = 3,
                         filter_incomplete = FALSE, debug = FALSE) {
+
+  # global variables
+  end = context = conts_complete = NULL
 
   # create column names for after the split:
   col_names <- c(paste(rep('context', no_of_contexts:no_of_contexts-1), no_of_contexts:1, sep = ""), "context", "end")
