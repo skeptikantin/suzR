@@ -44,7 +44,7 @@
 #' amaze_create_surpfiles(stims, targets = "Target", distractors = "Alternative", print_to_console = TRUE)
 #'}
 amaze_create_surpfiles <- function(x, targets = "targets", distractors = "distractors",
-                                   position = 4, grouping = "Id", file = NULL, fileinfo = NULL,
+                                   position = 4, grouping = "sid", file = NULL, fileinfo = NULL,
                                    write_to_file = TRUE, print_to_console = FALSE) {
   # split at grouping variable
   x_ls <- split(x, x[grouping])
