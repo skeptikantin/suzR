@@ -9,7 +9,7 @@ amaze_create_surpfiles(
   targets = "targets",
   distractors = "distractors",
   position = 4,
-  grouping = "Id",
+  grouping = "sid",
   file = NULL,
   fileinfo = NULL,
   write_to_file = TRUE,
